@@ -6,7 +6,7 @@ include '../config/connection.php';
 $inputUsername = $_POST['username'];
 $inputPassword = $_POST['password'];
 
-// cari user berdasarkan username
+// Cari user berdasarkan username
 $query = "SELECT * FROM Users WHERE username = ?";
 $params = [$inputUsername];
 $stmt = sqlsrv_query($conn, $query, $params);
@@ -19,22 +19,25 @@ $user = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
 
 // Validasi user
 if ($user) {
-    // Verif pass
+    // Verifikasi password
     if (password_verify($inputPassword, $user['password'])) {
-        // session berdasarkan role
+        // Set sesi berdasarkan data user
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role'];
         $_SESSION['id_user'] = $user['id_user'];
+        $_SESSION['name'] = isset($user['name']) ? $user['name'] : 'Pengguna'; // Kolom 'name' opsional
 
-        // Sesuai role
+        // Redirect sesuai role
         if ($user['role'] === 'admin') {
-            $_SESSION['role'] = 'admin';
-            header("Location: ../views/pages/admin/Dashboard.html");
+            header("Location: ../views/pages/admin/Dashboard.php");
         } elseif ($user['role'] === 'mahasiswa') {
-            $_SESSION['role'] = 'mahasiswa';
-            header("Location: ../views/pages/mahasiswa/dashboard.php");
+            header("Location: ../dashboard.php");
+        } else {
+            echo "Role tidak dikenali!";
         }
-    } else echo "Password salah!";
+    } else {
+        echo "Password salah!";
+    }
 } else {
     echo "Username tidak ditemukan!";
 }

@@ -70,7 +70,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="logout.html">
+          <a href="views/pages/logout.php">
             <i class="fas fa-sign-out-alt"></i>
             <p>Logout</p>
           </a>
