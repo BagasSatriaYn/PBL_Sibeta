@@ -7,11 +7,24 @@
   <link rel="stylesheet" href="../../../assets/css/pengajuanadmin.css">
 </head>
 <body>
-  <!-- Sidebar -->
-  <?php include('../../layouts/sidebar.php') ?>
-      <!-- Header -->
-      <?php include('../../layouts/header.php') ?>
   <div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="SiBeTa.png" alt="Logo SiBeTa">
+          </div>          
+      <nav>
+        <ul>
+          <li><a href="#" class="active">Dashboard</a></li>
+          <li><a href="#">Profile</a></li>
+        </ul>
+      </nav>
+      <button class="logout">Logout</button>
+    </aside>
+    <main class="content">
+      <header>
+        <h2>Pengajuan Mahasiswa</h2>
+        <p>Dashboard / Validasi Berkas</p>
+      </header>
       <div class="search-filter">
         <input type="text" class="search" placeholder="Search">
         <button class="filter">Belum Diunggah</button>
@@ -45,12 +58,8 @@
       <button class="back">Kembali</button>
     </main>
   </div>
-  </div>
-<!-- Footer -->
-<?php include('../../layouts/footer.php') ?>
-</div>
-<!-- JavaScript -->
-<?php include('../js.php') ?>
-
+  <footer>
+    <p>2024 © SiBeta</p>
+  </footer>
 </body>
 </html>
