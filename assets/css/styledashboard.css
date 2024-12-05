@@ -1,0 +1,179 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+.sidebar {
+    width: 20%;
+    background-color: #f4f4f4;
+    padding: 10px 20px; /* Kurangi padding atas */
+    display: flex;
+    flex-direction: column;
+    height: 95vh; /* Kurangi tinggi agar sejajar */
+    margin-top: 10px; /* Tambahkan margin dari atas */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    font-family: Suez;
+    color: #3b82f6;
+    font-weight: bold;
+    text-align: center; /* Posisikan logo di tengah */
+    margin-bottom: 30px;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin-top: 0; /* Kurangi jarak atas */
+  }
+  
+  nav ul li {
+    margin-bottom: 15px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  
+  nav ul li a.active,
+  nav ul li a:hover {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .logout {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: auto; /* Posisikan tombol logout di bawah */
+  }
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Header Layout */
+header {
+    display: flex; /* Gunakan Flexbox untuk sejajar horizontal */
+    justify-content: space-between; /* Pisahkan kiri dan kanan */
+    align-items: center; /* Vertikal sejajar di tengah */
+    margin-bottom: 20px; /* Jarak header dari elemen lainnya */
+}
+
+/* Header Left (Dashboard and Welcome Message) */
+.header-left {
+    display: flex;
+    flex-direction: column; /* Teks berada di bawah satu sama lain */
+}
+
+.header-left h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.welcome-message {
+    font-size: 16px;
+    color: #666;
+    margin-top: 5px; /* Jarak kecil di bawah judul */
+}
+
+/* Profile Container */
+.profile-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center; /* Gambar dan teks sejajar vertikal */
+    gap: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #4682b4;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.user-id {
+    font-size: 14px;
+    color: #666;
+}
+
+
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.card h2 {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+/* Tambahkan ruang untuk konten di atas footer */
+.container {
+    padding-bottom: 50px; /* Pastikan konten utama tidak tertutup footer */
+}
+
+
+/* Footer Styles */
