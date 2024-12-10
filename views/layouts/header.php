@@ -1,5 +1,8 @@
 <?php
-session_start();
+// Periksa apakah session sudah dimulai
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!-- navbar -->
 <div class="main-header">
@@ -8,7 +11,7 @@ session_start();
         <div class="logo-header" data-background-color="dark">
             <a href="index.html" class="logo">
                 <img
-                    src="assets/img/SiBeTa.png"
+                    src="../views/assets/img/SiBeTa.png"
                     alt="navbar brand"
                     class="navbar-brand"
                     height="40" />
@@ -319,10 +322,11 @@ session_start();
                                         <img src="assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
                                     </div>
                                     <div class="u-text">
-                                        <h4><?php echo $_SESSION['name']; ?></h4>
-                                        <p class="text-muted">hello@example.com</p>
-                                        <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-                                    </div>
+    <h4><?php echo $_SESSION['name']; ?></h4>
+    <p class="text-muted"><?php echo isset($_SESSION['email']) ? $_SESSION['email'] : 'Email tidak tersedia'; ?></p>
+    <a href="../pages/profile.php" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+</div>
+
                                 </div>
                             </li>
                             <li>

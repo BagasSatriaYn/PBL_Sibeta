@@ -1,0 +1,64 @@
+/* Styling untuk tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+/* Styling untuk tombol edit */
+button.edit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+button.edit:hover {
+    background-color: #218838;
+}
+
+/* Styling tambahan agar kolom status lebih jelas */
+td {
+    vertical-align: middle;
+}
+
+/* Styling untuk input dan filter */
+.filters input, .filters button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 14px;
+}
+
+.filters button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background-color: #0056b3;
+}

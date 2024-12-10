@@ -1,5 +1,5 @@
 <!-- footer -->
-<footer class="footer">
+<footer class="bg-light py-3 mt-auto">
     <div class="container-fluid d-flex justify-content-between">
         <nav class="pull-left">
             
