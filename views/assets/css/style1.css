@@ -68,12 +68,13 @@ body {
 /* Gaya untuk posisi logo di pojok kiri atas */
 .pojok {
     position: absolute;
+    width: 120px;
     color: rgb(255, 255, 255);
     font-size: 1.5em;
     font-weight: bold;
     z-index: 1;
     left: 2%;
-    top: 1%; /* Mengatur margin atas agar tidak tertutup navbar */
+    top: 1.5%; /* Mengatur margin atas agar tidak tertutup navbar */
     display: flex; /* Menggunakan flexbox untuk menyusun logo dan teks */
     align-items: center; /* Mengatur logo dan teks sejajar secara vertikal */
     font-family: 'Suez One', serif;

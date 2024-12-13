@@ -1,23 +1,20 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
+
+if (!isset($_SESSION['id_user'])) {
     header("Location: ../../controller/login.php");
     exit;
 }
 
-$nim = $_SESSION['nim'] ?? null;
+$nim = $_SESSION['nim'] ?? null; // Ambil NIM dari session
 
-if (!$nim || !ctype_digit($nim)) { // Validasi NIM
-    die("NIM tidak ditemukan atau invalid. Pastikan Anda sudah login.");
+if (!$nim || !ctype_digit((string)$nim)) {
+    die("NIM tidak ditemukan atau invalid.");
 }
+
+$user_id = $_SESSION['id_user']; // Ambil user_id dari session
 
 include('../../config/connection.php'); // Koneksi database
-
-$mahasiswa_id = $_POST['mahasiswa_id'] ?? $_SESSION['mahasiswa_id'] ?? null;
-
-if (!$mahasiswa_id) {
-    die("Mahasiswa ID tidak ditemukan.");
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $allowed_extensions = ['jpg', 'jpeg', 'png', 'pdf', 'docx'];
@@ -54,9 +51,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $status = 'pending';
                 $tanggal_upload = date("Y-m-d H:i:s");
 
-                $sql = "INSERT INTO berkasvalidasi (mahasiswa_id, jenis_berkas, file_path, status, tanggal_upload, nim)
+                $sql = "INSERT INTO berkasvalidasi (user_id, jenis_berkas, file_path, status, tanggal_upload, nim)
                         VALUES (?, ?, ?, ?, ?, ?)";
-                $params = [$mahasiswa_id, $jenis_berkas, $file_path, $status, $tanggal_upload, $nim];
+                $params = [$user_id, $jenis_berkas, $file_path, $status, $tanggal_upload, $nim];
 
                 $stmt = sqlsrv_prepare($conn, $sql, $params);
                 if ($stmt === false || !sqlsrv_execute($stmt)) {

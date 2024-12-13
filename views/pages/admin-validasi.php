@@ -1,79 +1,78 @@
 <?php
-// Masukkan koneksi database
+// Koneksi database
 include('../../config/connection.php');
 
-// Query untuk mengambil data berkas
-$sql = "SELECT * FROM uploads"; // Sesuaikan nama tabel dengan tabel uploads
-$result = sqlsrv_query($conn, $sql); // Gunakan sqlsrv_query() untuk eksekusi query
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+// Ambil data pending
+$sql = "SELECT * FROM berkasvalidasi WHERE status = 'pending'";
+$result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SiBeTa - Validasi Berkas</title>
-
-  <!-- Include CSS -->
-  <?php include('css.php'); ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Berkas Mahasiswa</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <main class="main-content">
-      <!-- Header -->
-      <?php include('../layouts/header.php'); ?>
-
-      <div class="content">
-        <h1>Validasi Berkas UKT</h1>
-        <p>Dashboard / Validasi Berkas UKT</p>
-
-        <!-- Tabel Data -->
-        <table class="table table-bordered">
-          <thead>
+    <h2>Verifikasi Berkas Mahasiswa</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Jenis Berkas</th>
+            <th>File</th>
+            <th>NIM</th>
+            <th>Tanggal Upload</th>
+            <th>Aksi</th>
+        </tr>
+        <?php if ($result->num_rows > 0): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['jenis_berkas'] ?></td>
+                    <td><a href="<?= $row['file_path'] ?>" target="_blank">Lihat File</a></td>
+                    <td><?= $row['nim'] ?></td>
+                    <td><?= $row['tanggal_upload'] ?></td>
+                    <td>
+                        <form action="proses-verifikasi.php" method="POST" style="display: inline;">
+                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                            <input type="hidden" name="status" value="verified">
+                            <button type="submit" style="color: green;">Verifikasi</button>
+                        </form>
+                        <form action="proses-verifikasi.php" method="POST" style="display: inline;">
+                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                            <input type="hidden" name="status" value="rejected">
+                            <input type="text" name="admin_note" placeholder="Alasan penolakan" required>
+                            <button type="submit" style="color: red;">Tolak</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        <?php else: ?>
             <tr>
-              <th>No</th>
-              <th>Mahasiswa ID</th>
-              <th>Bukti</th>
-              <th>Status</th>
-              <th>Aksi</th>
+                <td colspan="6">Tidak ada data pending.</td>
             </tr>
-          </thead>
-          <tbody>
-            <?php
-            if ($result) {
-                $no = 1; // Penomoran
-                while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
-                    echo "<tr>
-                            <td>" . $no++ . "</td>
-                            <td>" . $row["mahasiswa_id"] . "</td>
-                            <td><a href='" . htmlspecialchars($row["file_ukt"], ENT_QUOTES, 'UTF-8') . "' target='_blank'>Lihat Bukti</a></td>
-                            <td>" . (!empty($row["status"]) ? ucfirst($row["status"]) : '-') . "</td>
-                            <td>
-                              <form action='proses-verifikasi.php' method='POST'>
-                                <input type='hidden' name='id' value='" . $row["id"] . "' />
-                                <select name='status' required>
-                                  <option value='' disabled selected>Pilih Status</option>
-                                  <option value='Verified'>Verifikasi</option>
-                                  <option value='Rejected'>Tolak</option>
-                                </select>
-                                <button type='submit'>Simpan</button>
-                              </form>
-                            </td>
-                          </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='5'>Data tidak ditemukan</td></tr>";
-            }
-            ?>
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
-
-  <!-- Footer -->
-  <?php include('../layouts/footer.php'); ?>
-
-  <!-- Include JS -->
-  <?php include('js.php'); ?>
+        <?php endif; ?>
+    </table>
 </body>
 </html>

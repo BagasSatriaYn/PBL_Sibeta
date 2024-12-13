@@ -49,7 +49,7 @@ function getStatusColor($status) {
       <?php include('../layouts/sidebar.php') ?>
 
       <!-- Header -->
-      <?php include('../layouts/header.php') ?>
+     
 
       <!-- Konten di bawah header -->
       <div class="containers">
@@ -101,33 +101,34 @@ function getStatusColor($status) {
       <tbody>
         <tr>
           <td>1</td>
-          <td><?= $row['nim'] ?></td>
+          <td><?= $row['nim'] ?></td>`
           <td><?= $row['nama'] ?></td>
           <td><?= $row['prodi'] ?></td>
           <td><?= $row['ukt_status'] === 'tuntas' ? 'Tuntas' : 'Belum Tuntas' ?></td>
           <td>-</td>
           <td>
-            <?php if ($row['file']) : ?>
-              <a href="download-file.php?file=<?= $row['file'] ?>">Download</a>
-            <?php else : ?>
+          <?php if (!empty($row['file_patch'])) : ?>
+              <a href="uploads/<?= htmlspecialchars($row['file_patch']) ?>" target="_blank">Download</a>
+          <?php else : ?>
               Tidak ada file
-            <?php endif; ?>
-          </td>
+          <?php endif; ?>
+      </td>
+
         </tr>
       </tbody>
     </table>
     <?php
-    // Cek apakah semua status sudah tuntas
-    $allTuntas = true;
-    foreach (['ukt_status', 'perpustakaan_status', 'kompen_status', 'skripsi_status', 'jurnal_status'] as $status) {
-        if ($row[$status] !== 'tuntas') {
-            $allTuntas = false;
-            break;
-        }
-    }
-    ?>
+      $allTuntas = true;
+      foreach (['ukt_status', 'perpustakaan_status', 'kompen_status', 'skripsi_status', 'jurnal_status', 'file_patch'] as $status) {
+          if (!isset($row[$status]) || ($row[$status] !== 'tuntas' && $status !== 'file_patch')) {
+              $allTuntas = false;
+              break;
+          }
+      }
+      ?>
+
     <button type="submit" <?= $allTuntas ? '' : 'disabled' ?> style="background-color: <?= $allTuntas ? 'blue' : 'grey' ?>; color: white;">
-      Ajukan
+      Download
     </button>
   </form>
 </div>

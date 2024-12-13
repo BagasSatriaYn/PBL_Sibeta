@@ -130,13 +130,7 @@ $role = isset($_SESSION['role']) ? $_SESSION['role'] : 'guest';
               <i class="fas fa-upload"></i>
               <p>Upload Berkas</p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="../pages/upload-ukt.php">
-              <i class="fas fa-upload"></i>
-              <p>Upload Berkas UKT</p>
-            </a>
-          </li>
+          
           <li class="nav-section">
             <span class="sidebar-mini-icon">
               <i class="fa fa-ellipsis-h"></i>

@@ -32,3 +32,5 @@
 <link rel="stylesheet" href="../assets/css/validasiberkas.css" />
 <link rel="stylesheet" href="../assets/css/cekstatus.css" />
 <link rel="stylesheet" href="../assets/css/apload-berkas.css" />
+<link rel="stylesheet" href="../assets/css/statusukt.css">
+<link rel="stylesheet" href="../assets/css/statusperpus.css">

@@ -78,21 +78,21 @@ p {
   display: block;
   margin: 10px auto;
   padding: 10px;
-  border: 1px solid #dfe6e9;
+  border: 1px solid #3498db;
   border-radius: 8px;
-  background-color: #f5f5f5;
+  background-color: #3498db;
   font-size: 14px;
   color: #34495e;
   cursor: pointer;
 }
 
 .file-input input[type="file"]:hover {
-  background-color: #e9ecef;
+  background-color: #0055ff;
 }
 
 span {
   font-size: 12px;
-  color: #95a5a6;
+  color: #0e1540;
   display: block;
   margin-top: 5px;
 }

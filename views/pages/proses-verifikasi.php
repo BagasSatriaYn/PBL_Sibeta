@@ -1,22 +1,31 @@
 <?php
+// Koneksi database
 include('../../config/connection.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'] ?? null;
-    $status = $_POST['status'] ?? null;
-
-    if ($id && $status) {
-        $query = "UPDATE uploads SET status = ? WHERE id = ?";
-        $params = [$status, $id];
-        $stmt = sqlsrv_query($conn, $query, $params);
-
-        if ($stmt) {
-            header("Location: validasi-berkas.php?message=success");
-        } else {
-            echo "Gagal memperbarui status: " . print_r(sqlsrv_errors(), true);
-        }
-    } else {
-        echo "Data tidak lengkap.";
-    }
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
 }
+
+// Ambil data dari form
+$id = $_POST['id'];
+$status = $_POST['status']; // 'verified' atau 'rejected'
+$admin_note = isset($_POST['admin_note']) ? $_POST['admin_note'] : null;
+
+// Validasi input
+if ($id && in_array($status, ['verified', 'rejected'])) {
+    // Update status di database
+    $sql = "UPDATE berkasvalidasi SET status = ?, admin_note = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ssi', $status, $admin_note, $id);
+
+    if ($stmt->execute()) {
+        echo "Berkas berhasil diperbarui.";
+    } else {
+        echo "Gagal memperbarui berkas.";
+    }
+} else {
+    echo "Input tidak valid.";
+}
+
+$conn->close();
 ?>
